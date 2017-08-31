@@ -1,0 +1,59 @@
+body{
+	margin-top: 10px;
+	margin-bottom: 60px;
+}
+
+h1{
+	font-family: 'Baloo Tamma', cursive !important;
+	font-size : 2em !important;
+	color : #2d4171 !important;
+	margin-top : 10px;
+	margin-bottom : 20px;
+	text-shadow : none;
+	font-weight : bolder;
+}
+
+.importantText{
+	font-weight: bolder;
+	font-size : 1.5em;
+	font-family: bitter;	
+}
+
+.ipInputPh1{
+	max-width: 65px
+}
+
+hr {
+	border:none;
+	border-bottom: 1px solid #1f1209;
+	box-shadow: 0 20px 20px -20px #333;
+}
+
+#roots3_1_ph1{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.rootGroup{
+	margin-bottom: 10px;
+}
+
+.row{
+	margin-top: 60px;
+}
+
+.fbAlert{
+	text-align : center;
+}
+
+.errorLog{
+	font-weight : bolder;
+}
+
+#funcExpr{
+	font-style : italic;
+	font-size : 1.4em;
+	margin-left : 20px;
+	margin-top: 20px;
+	font-family: bitter;	
+}

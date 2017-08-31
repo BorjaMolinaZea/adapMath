@@ -1,0 +1,47 @@
+.chart1_1{
+	width: 100%;
+	margin-top: 20px;
+}
+
+.alert{
+	margin-top: 25px;
+}
+
+.btn-lg{
+	min-width: 150px;
+	margin-left: 50px;
+	margin-top: 25px;
+}
+
+p.expr{
+	font-style : italic;
+	font-size : 1.4em;
+	margin-left : 20px;
+	margin-top: 20px;
+	font-family: bitter;
+}
+
+p.enun{
+	font-size : 1.2em;
+	margin-left : 20px;
+	margin-top: 20px;
+	font-family: bitter;
+}
+
+
+.dataTable{
+	margin-top: 25px;
+	max-width : 300px;
+	text-align : center;
+	border: 1px solid black !important;
+}
+
+.dataTable th{
+	text-align : center;
+	background-color : black;
+	color : white !important;
+}
+
+button.nextBtn{
+	margin-left: 150px;
+}

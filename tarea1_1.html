@@ -1,0 +1,120 @@
+<!doctype html>
+
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+
+	<title>Tarea 1.1.</title>
+	<meta name="description" content="Tarea 1.1.">
+	<meta name="author" content="Borja Molina Zea">
+
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Tamma" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
+
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/font-awesome.min.css">
+	<link rel="stylesheet" href="style/global.css">
+	<link rel="stylesheet" href="style/1_1.css">
+	<link rel="stylesheet" href="style/borClock.css">
+</head>
+
+<body>
+
+	<div id="task1_1" class="container">
+		<div class="row" v-if="phase < 5">
+			<div class="col-xs-12">
+				<h1>Tarea 1.1.</h1>
+			</div>
+			<div class="col-lg-6 col-md-7 col-sm-7  col-xs-12">
+				<span class="1_1_phase1" v-if="phase == 1">
+					<p class="importantText">¿Representa una función la siguiente gráfica?</p>
+					<img class="chart1_1" v-bind:src="cImage">
+				</span>
+				<span class="1_1_phase2" v-if="phase == 2">
+					<p class="importantText">¿Representa una función la siguiente expresión?</p>
+					<p class="expr" v-html="formatExpr(cExpr[0])"></p>
+				</span>
+				<span class="1_1_phase3" v-if="phase == 3">
+					<p class="importantText">¿Representa una función la siguiente tabla de valores?</p>
+					<center>
+					<table class="table table-striped dataTable">
+					  <thead class="thead-inverse">
+						<tr>
+						  <th>x</th>
+						  <th>y</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+						  <td>{{cTable[0][0]}}</td>
+						  <td>{{cTable[1][0]}}</td>
+						</tr>
+						<tr>
+						  <td>{{cTable[0][1]}}</td>
+						  <td>{{cTable[1][1]}}</td>
+						</tr>
+						<tr>
+						  <td>{{cTable[0][2]}}</td>
+						  <td>{{cTable[1][2]}}</td>
+						</tr>
+						<tr>
+						  <td>{{cTable[0][3]}}</td>
+						  <td>{{cTable[1][3]}}</td>
+						</tr>
+						<tr>
+						  <td>{{cTable[0][4]}}</td>
+						  <td>{{cTable[1][4]}}</td>
+						</tr>
+					  </tbody>
+					</table>
+					</center>
+				</span>
+				<span class="1_1_phase4" v-if="phase == 4">
+					<span class="importantText">¿Representa una función el siguiente enunciado?</span>
+					<p class="enun">{{cEnun[0]}}</p>
+				</span>
+			</div>
+
+			<div class="col-lg-5 col-md-4 col-sm-5 col-xs-12 responseArea">
+				<p class="importantText">Responder:</p>
+				<button id="yes-btn" class="btn btn-success btn-lg" v-on:click="response(true)">Sí</button>
+				<button id="no-btn" class="btn btn-danger btn-lg" v-on:click="response(false)">No</button>
+				<div class="alert alert-success" role="alert" v-if="resp && isCorrect">
+					<center>
+						<strong>Correcto </strong><i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
+					</center>
+				</div>
+				
+				<div class="alert alert-danger" role="alert" v-if="resp && !isCorrect">
+					<center>
+						<strong>Incorrecto </strong><i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
+					</center>
+					<br>
+					<p>{{correction}}</p>
+				</div>
+					<button class="btn btn-success btn-lg nextBtn" v-on:click="next" v-if="resp">Siguiente</button>
+			</div>
+			<div class="borClock"  v-if="phase != 5"></div>
+		</div>
+		<div class="row" v-if="phase == 5">
+			<div class="col-xs-12">
+				<h1>Tarea completada</h1>
+				<strong>Informe de la tarea:</strong>
+				<ul>
+					<li>Número de preguntas respondidas: {{getnTotal()}}</li>
+					<li>Número de respuestas correctas: {{getnCorrects()}}</li>
+					<li>Número de respuestas incorrectas: {{getnIncorrects()}}</li>
+					<li>Porcentaje de aciertos: {{getPercentCorrection()}}</li>
+					<li>Nivel alcanzado: {{lvlText[lvl]}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/jquery-3.2.1.min.js"></script>
+	<script src="scripts/vue.js"></script>
+	<script src="scripts/gbTools.js"></script>
+	<script src="scripts/1_1.js"></script>
+	<script src="scripts/borClock.js"></script>
+</body>
+</html>

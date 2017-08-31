@@ -1,0 +1,198 @@
+.navbar_gdp{
+	border-bottom-color : maroon;
+	border-bottom-width : 4px;
+	}
+
+	.fa-8x{
+		font-size : 8em !important;
+	}
+	.fa-7x{
+		font-size : 7em !important;
+	}
+	.fa-6x{
+		font-size : 6em !important;
+	}
+	
+	.contact_icons{
+		text-align : center !important;	
+		margin-top : 40px;
+	}
+	
+	.slider_gdp{
+		margin-top: 2em;
+		
+	}
+	
+	#map {
+       height: 400px;
+       width: 100%;
+    }
+
+	
+	h1{
+		font-family: 'Baloo Tamma', cursive !important;
+		font-size : 2em !important;
+		color : #2d4171 !important;
+		margin-top : 10px;
+		margin-bottom : 20px;
+		text-shadow : none;
+		font-weight : bolder;
+	}
+	
+	h2{
+		font-family: 'Baloo Tamma', cursive !important;
+		font-size : 1.6em !important;
+		color : #2d4171 !important;
+		text-shadow : none;
+		font-weight : bolder;
+	}
+	
+	h3{
+		font-family: bitter;	
+		font-size : 1.2em !important;
+		margin-top: 0px;
+		font-weight:bold;
+	}
+	
+	.co-footer{
+		text-align : center;
+		margin-top : 10px;
+		font-size : 0.9em;
+		font-style: italic;
+	}
+	
+	.program-list{
+		font-size : 1.1em;
+		line-height : 1.1em;
+		font-family: bitter;
+	}
+	
+	.program-list li{
+		margin-bottom : 20px;
+	}
+	
+	.co-chairs{
+		font-family: bitter;
+	}
+	
+	.co-chairs li{
+		margin-bottom: 10px;
+	}
+	
+	.program{
+		font-family: bitter;
+				border-radius:15px;
+		background-color:#dddddd;
+	}
+	
+	.program-item{
+		font-family: bitter;
+		margin-bottom: 15px;
+		margin-left: 25px;
+	}
+	
+	img.co-chair{
+		max-height : 150px;
+		margin: 0 auto;
+		display:block;
+		border-radius:15px;
+	}
+	
+	.co-chairs h3{
+		text-align : center;		
+	}
+	
+	.classesImg{
+		background-color: maroon !important;
+		width: 98%;	
+	}
+	
+	.bigClassesImg{
+		background-color: maroon !important;
+		width: 100%;	
+	}
+	
+	.imgGallery>.imgContainer{
+		display:flex;
+		
+	}
+	
+	.imgGallery>.imgContainer>img{
+		
+	}
+	
+	.videoGallery .videoOfGallery{
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	
+	.mapImg{
+		width : 100%
+	}
+	
+	.classesImg:hover{
+		border-color : #F36D6D;
+		width : 100%;
+		cursor : pointer;
+	}
+	
+	.bigClassesImg:hover{
+		border-color : #F36D6D;
+		width : 100%;
+		cursor : pointer;
+	}
+
+	.modal-header .close {
+  font-size: 3em;
+}
+	
+	h2>a{
+		color : maroon !important;
+	}
+	
+	.classesArea h2{
+		text-align : center !important;
+	}
+
+	.inverted_area{
+		background-color : #eeeeee;
+	}
+	.contact_link{
+		font-size:larger;
+		font-weight:bolder;
+		
+	}
+	
+	p.standar_text {
+		font-size : 1.1em;
+		line-height : 1.1em;
+		font-family: bitter;
+	}
+
+	
+	.area_gdp{
+		padding-top: 30px;
+		padding-bottom: 15px;
+	}
+	
+	.marginNavbar{
+		margin-top:5em;
+	}
+	
+	.galleryImg{
+		cursor: pointer;
+	}
+	
+	.modal-dialog{
+    position: relative;
+    display: table; //This is important 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;   
+}
+
+
+.classesMainImg{
+	padding-top: 2em;
+}

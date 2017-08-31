@@ -1,0 +1,146 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Tarea 3.1.</title>
+	<meta name="description" content="Tarea 3.1.">
+	<meta name="author" content="Borja Molina Zea">
+
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Tamma" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet"> 
+
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/font-awesome.min.css">
+	<link rel="stylesheet" href="style/global.css">
+</head>
+
+<body>
+	<div class="container fase1">
+		<div class="row" id='qBody'>
+			<div class="col-xs-12">
+				<h1>Tarea 3.1.</h1>
+			</div>
+			<div class="taskDescription">
+				
+			</div>
+			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-12">
+				<span class="importantText">Sea f(x):</span>
+				<div id="plot">
+				</div>
+				<div id="funcExpr">
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 responseArea">
+				<span class="importantText">Hallar:</span>
+				<div class="form-inline">
+					<div class="form-group">
+						<label for="tFunc">Tipo de función:</label>
+						<br>
+						<label class="radio-inline"><input type="radio" name="tFunc" value=0 checked="checked">Lineal</label>
+						<label class="radio-inline"><input type="radio" name="tFunc" value=1>Cuadrática</label>
+					</div>
+					<hr>
+					<div class="form-group ph1form">
+						<strong>Puntos de corte con el eje OX:</strong>
+						<br>
+						<div id="roots3_1_ph1">
+							<div class="rootGroup">
+								<label for="root1">x = </label>
+								<input type="number" class="form-control input-sm rootInput ipInputPh1" id="root1">
+								<span>,y = 0 </span>
+								<br>
+							</div>
+						</div>
+						<button id="addRootGUIPh1" class="btn btn-default btn-sm btn-success">Añadir</button>
+						<button id="deleteRootGUIPh1" class="btn btn-default btn-sm btn-danger">Quitar</button>
+						<br>
+					</div>
+					<hr>
+					<div class="form-group">
+						<strong>Puntos de corte con el eje OY:</strong>
+						<br>	
+						<span>x = 0, </span>
+						<label for="OY">y = </label>
+						<input type="number" class="form-control input-sm yCutInput ipInputPh1" id="yCut">
+					</div>
+					<hr>
+					<div class="form-group vertInput">
+						<strong>Vértice de la parábola:</strong>
+						<br>						
+						<label for="vertX">x = </label>
+						<input type="number" class="form-control input-sm vertX ipInputPh1">
+						<label for="verty">, y = </label>
+						<input type="number" class="form-control input-sm vertY ipInputPh1">
+						<hr>
+					</div>
+				</div> 
+				<a href="#fbArea"><button id="response" class="btn btn-primary">Responder</button></a>
+			</div>
+		</div>
+		
+		<div class="row feedback" id="fbArea" style="display:none">
+			<div class="col-xs-12 correctFb" style="display:none">
+				<div class="alert alert-success fbAlert" role="alert">
+					<strong>¡Enhorabuena!, has acertado. </strong><i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="col-xs-12 incorrectFb" style="display:none">
+				<div class="alert alert-danger fbAlert" role="alert">
+					<strong>Respuesta incorrecta. </strong><i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
+				</div>
+				<span class="errorLog">
+				Has cometido los siguientes fallos:
+				<ul>
+					<li class="error1 errorLogLine" style="display:none">
+						Has dicho que se trataba de una función lineal y se trata de una cuadrática.
+					</li>
+					<li class="error2 errorLogLine" style="display:none">
+						Has dicho que se trataba de una función cuadrática y se trata de una lineal.
+					</li>
+					<li class="error3 errorLogLine" style="display:none">
+						No has hallado correctamente los puntos de corte con el eje OX o raices de la función: <span id="xCutFb"></span>
+					</li>
+					<li class="error4 errorLogLine" style="display:none">
+						No has hallado correctamente el punto de corte cone el eje OY. El punto corte con el eje OY es <span id="yCutFb"></span>
+					</li>
+					<li class="error5 errorLogLine" style="display:none">
+						No has hallado correctamente el vértice de la parábola. El vértice de la parábola está en el punto <span id="vertexFb"></span>
+					</li>
+				</ul>
+				</span>
+				<div class="alert alert-info error1" role="alert" style="display:none">
+					<strong>Recuerda: </strong>las funciones lineales tienen la forma f(x) = ax + b y su gráfica es una recta
+				</div>
+				<div class="alert alert-info error2" role="alert" style="display:none">
+					<strong>Recuerda: </strong>las funciones cuadráticas tienen la forma f(x) = ax<sup>2</sup> + bx + c y su gráfica es una parábola
+				</div>
+				<div class="alert alert-info error3" role="alert" style="display:none">
+					<strong>Recuerda: </strong>Los puntos de corte con el eje OX -o raices- de una función son los puntos tales que f(x) = 0. <span id="quadraticTip">En las funciones cuadráticas las raices vienen dadas por la expresión: <img src="media/img/cuadratica_raices.png" style="max-width:170px"></span>
+				</div>
+				<div class="alert alert-info error4" role="alert" style="display:none">
+					<strong>Recuerda: </strong>Las funciones lineales y cuadráticas siempre tienen un único punto de corte con el eje OY, para calcularlo encontrarmos el valor de f(0)
+				</div>
+				<div class="alert alert-info error5" role="alert" style="display:none">
+					<strong>Recuerda: </strong>El vértice de una ecuación cuadrática se calcula como Vx = -b/2a y Vy = f(Vx)
+				</div>
+			</div>
+			<center>
+				<a><button id="nextQ" class="btn btn-primary btn-lg">Siguiente</button></a>
+			</center>
+		</div>
+	</div>
+	
+	
+
+	<script src="scripts/jquery-3.2.1.min.js"></script>
+	<script src="scripts/math.min"></script>
+	<script src="scripts/d3.min.js"></script>
+	<script src="scripts/function-plot@1.14.0.js"></script>
+	<script src="scripts/algebra-0.2.6.min.js"></script>
+	<script src="scripts/borMath.js"></script>
+	<script src="scripts/3_1s.js"></script>
+
+</body>
+</html>
