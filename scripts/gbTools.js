@@ -72,3 +72,4 @@ function trickRandi(min, max, act){
 	}
 	return newRandi;
 }
+

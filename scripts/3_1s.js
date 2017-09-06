@@ -1,11 +1,78 @@
-let cPhase = 0;
+let fns = ['-x-1','2x^2-4x','x','-3x+2','2x', 'x-2', 'x+2', '-2x^2', '3x^2+5'];
+let idDrawArea = "#plot";
+
+var app = new Vue({
+	el: '#task3_1',
+	phase : 1,
+	data: {
+		phase : 1,
+		cont : 0,
+		lvl : 0,
+		cEqi : randi(0,fns.length-1),
+		uFnType : 0,
+		slope : null,
+		vertex : [null, null],
+		yCut : null,
+		xCut : null,
+		correct : [0, 0, 0, 0],
+		incorrect : [0, 0, 0, 0],
+		streak : 0, 
+		givenAnsw : false,
+	},
+	
+	methods : {
+		isLinear: function(){
+			return true;
+		},
+		getFn : function(){
+			return fns[this.cEqi]
+		},
+		draw : function(){
+			draw(idDrawArea, this.getFn())
+		},
+		isLinear : function(){
+			return Number(this.uFnType) ? false : true;
+		},
+		answ : function(){
+			this.isCorrect = true;
+			this.givenAnsw = true;
+			
+			if(this.isCorrect){
+				this.streak += 1;
+				if(this.streak == 4){
+					this.streak = 0;
+					this.phase += 1;
+					this.correct[this.phase-1] += 1
+				}
+			}
+			else{
+				this.streak += 0;
+				this.incorrect[this.phase-1] += 1
+			}
+			
+			if(this.phase == 1){
+				this.draw();
+			}
+			else if(this.phase == 2){
+				
+			}
+		},
+		nexQ : function(){
+			this.givenAnsw = false;
+			this.cEqi = trickRandi(0,fns.length-1, this.cEqi);
+		}
+	}
+})
+
+app.draw();
+
+/*let cPhase = 0;
 let selectedFn = 0;
 
 let mData = [
 	['-x-1','2x^2-4x'],
 	['x+2', 'x'],
 	[]
-
 ]
 
 function addRootGUI(){
@@ -20,7 +87,6 @@ function addRootGUI(){
 		
 		let newDiv = document.createElement("DIV");
 		newDiv.setAttribute("class", "rootGroup");  
-		
 		
 		let newSpan2 = document.createElement("SPAN"); 
 		newSpan2.innerHTML = "x = 0, ";
@@ -172,10 +238,9 @@ function nextQ(){
 	document.querySelectorAll(".error4").forEach((elem)=>elem.setAttribute("style", "display:none"));
 	document.querySelectorAll(".error5").forEach((elem)=>elem.setAttribute("style", "display:none"));
 	
-	
 	let fType = fnType(mData[cPhase][selectedFn]);
 	if(cPhase==0){
-		draw('#plot', mData[cPhase][selectedFn]);
+		//draw('#plot', mData[cPhase][selectedFn]);
 		if(fType != 1){
 			document.querySelector(".vertInput").setAttribute("style", "display:none");
 		}
@@ -203,4 +268,4 @@ draw('#plot', mData[cPhase][selectedFn]);
 let fType = fnType(mData[cPhase][selectedFn]);
 if(fType != 1){
 	document.querySelector(".vertInput").setAttribute("style", "display:none");
-}
+}*/
