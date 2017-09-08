@@ -47,15 +47,29 @@ function fnType(fn){
 	else return 0
 }
 
+function getSlope(fn){
+	let slope = null
+	try{
+		slope = Number(new RegExp(/\-?(\d+)/).exec(fn)[1]);
+	}
+	catch(err){
+		slope = 1
+	}
+	if(fn[0]=='-'){
+		slope *= -1;
+	}
+	return slope;
+}
+
 function getVertex(fn){
-	let a = 1;
-	if(fn[0] == "-"){
-		a = -1;
+	let a = Number(new RegExp(/\-?\d+/).exec(fn)[0]);
+	let b = 0;
+	try{
+		let b = Number(new RegExp(/\^2\+?(\-?\d+)x/).exec(fn)[1]);
 	}
-	else if(fn[0] != "x"){
-		a = Number(new RegExp(/\d+/).exec(fn)[0]);
+	catch(err){
+		
 	}
-	let b = Number(new RegExp(/\^2\+?(\-?\d+)/).exec(fn)[1]);
 	let vertX = -b/(2.0*a);
 	let vertY =  math.parse(fn).eval({x:vertX})
 	return [vertX, vertY];

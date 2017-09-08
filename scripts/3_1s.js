@@ -1,4 +1,4 @@
-let fns = ['-x-1','2x^2-4x','x','-3x+2','2x', 'x-2', 'x+2', '-2x^2', '3x^2+5'];
+let fns = ['-x-1','2x^2-4x','x','-3x+2','2x', 'x-2', 'x+2', '-2x^2', '3x^2+2'];
 let idDrawArea = "#plot";
 
 var app = new Vue({
@@ -13,11 +13,15 @@ var app = new Vue({
 		slope : null,
 		vertex : [null, null],
 		yCut : null,
-		xCut : null,
+		xCut : [null, null],
+		vertex : [null, null],
+		slope : null,
 		correct : [0, 0, 0, 0],
 		incorrect : [0, 0, 0, 0],
 		streak : 0, 
 		givenAnsw : false,
+		isCorrect : false,
+		errorLog : [false, false, false, false, false, false]
 	},
 	
 	methods : {
@@ -34,8 +38,52 @@ var app = new Vue({
 			return Number(this.uFnType) ? false : true;
 		},
 		answ : function(){
-			this.isCorrect = true;
+			this.isCorrect = false;
 			this.givenAnsw = true;
+			
+			this.xCut.forEach((x)=>{
+				x = Number(x)
+			})
+			
+			if(this.uFnType != fnType(this.getFn())){
+				if(this.uFnType){
+					this.errorLog[0] = true
+				}
+				else{
+					this.errorLog[1] = true
+				}
+			}
+			
+			let xResponse = equationSolver(this.getFn());
+			if(fnType(this.getFn()) == 0){
+				let slopeResponse = getSlope(this.getFn())
+				if(xResponse[0]!=this.xCut[0]){
+					this.errorLog[2] = true;
+				}
+				if(slopeResponse != this.slope){
+					this.errorLog[4] = true;
+				}
+			}
+			else{
+				let vertexResponse = getVertex(this.getFn());
+				this.errorLog[2] = this.xCut.every((x)=>{
+					return xResponse.indexOf(x) > -1;
+				})
+				let isVertexCorrect = this.vertex.every((x, i)=>{
+					return x == vertexResponse[i];
+				})
+				if(!isVertexCorrect){
+					this.errorLog[5] = true;
+				}
+			}
+			
+			if(this.yCut != getyCut(this.getFn())){
+				this.errorLog[3] = true
+			}
+			
+			this.isCorrect = !this.errorLog.reduce((x, y)=>{
+				return x || y;
+			})
 			
 			if(this.isCorrect){
 				this.streak += 1;
@@ -57,7 +105,7 @@ var app = new Vue({
 				
 			}
 		},
-		nexQ : function(){
+		nextQ : function(){
 			this.givenAnsw = false;
 			this.cEqi = trickRandi(0,fns.length-1, this.cEqi);
 		}

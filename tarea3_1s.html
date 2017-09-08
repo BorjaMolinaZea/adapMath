@@ -17,8 +17,8 @@
 </head>
 
 <body>
-	<div class="container fase1">
-		<div class="row" id="task3_1" v-if="phase!=5">
+	<div class="container fase1" id="task3_1" >
+		<div class="row" v-if="phase!=5">
 			<div class="col-xs-12">
 				<h1>Tarea 3.1.</h1>
 			</div>
@@ -48,14 +48,18 @@
 						<div id="roots3_1_ph1">
 							<div class="rootGroup">
 								<label for="root1">x = </label>
-								<input type="number" class="form-control input-sm rootInput ipInputPh1" id="root1">
+								<input type="number" class="form-control input-sm rootInput ipInputPh1" id="root1"  v-model="xCut[0]">
 								<span>,y = 0 </span>
 								<br>
 							</div>
 						</div>
-						<button id="addRootGUIPh1" class="btn btn-default btn-sm btn-success">Añadir</button>
-						<button id="deleteRootGUIPh1" class="btn btn-default btn-sm btn-danger">Quitar</button>
-						<br>
+						<div id="roots3_1_ph1" v-if="uFnType==1">
+							<div class="rootGroup">
+								<label for="root1">x = </label>
+								<input type="number" class="form-control input-sm rootInput ipInputPh1" id="root1"  v-model="xCut[1]">
+								<span>,y = 0 </span>
+							</div>
+						</div>
 					</div>
 					<hr>
 					<div class="form-group">
@@ -63,7 +67,7 @@
 						<br>	
 						<span>x = 0, </span>
 						<label for="OY">y = </label>
-						<input type="number" class="form-control input-sm yCutInput ipInputPh1" id="yCut">
+						<input type="number" class="form-control input-sm yCutInput ipInputPh1" id="yCut" v-model="yCut">
 					</div>
 					<hr>
 					<span v-if="!isLinear()">
@@ -71,17 +75,17 @@
 						<strong>Vértice de la parábola:</strong>
 						<br>						
 						<label for="vertX">x = </label>
-						<input type="number" class="form-control input-sm vertX ipInputPh1">
+						<input type="number" class="form-control input-sm vertX ipInputPh1" v-model="vertex[0]">
 						<label for="verty">, y = </label>
-						<input type="number" class="form-control input-sm vertY ipInputPh1">
+						<input type="number" class="form-control input-sm vertY ipInputPh1" v-model="vertex[1]">
 					</div>
 					<hr>
 					</span>
 					<span v-if="isLinear()">
 					<div class="form-group vertInput">
 						<strong>Pendiente de la recta:</strong>
-						<br>						
-						<input type="number" class="form-control input-sm slope ipInputPh1">
+						<br>
+						<input type="number" class="form-control input-sm slope ipInputPh1" v-model="slope">
 					</div>
 					<hr>
 					</span>
@@ -90,49 +94,55 @@
 			</div>
 		</div>
 		
-		<div class="row feedback" id="fbArea" v-if="phase!=5 && givenAnsw == true">
+		<div class="row feedback" id="fbArea" v-if="givenAnsw">
 			<div class="col-xs-12 correctFb">
-				<div class="alert alert-success fbAlert" role="alert">
+				<div class="alert alert-success fbAlert" v-if="isCorrect" role="alert">
 					<strong>¡Enhorabuena!, has acertado. </strong><i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
 				</div>
 			</div>
-			<div class="col-xs-12 incorrectFb">
+			<div class="col-xs-12 incorrectFb" v-if="!isCorrect">
 				<div class="alert alert-danger fbAlert" role="alert">
 					<strong>Respuesta incorrecta. </strong><i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
 				</div>
 				<span class="errorLog">
 				Has cometido los siguientes fallos:
 				<ul>
-					<li class="error1 errorLogLine">
+					<li class="errorLogLine" v-if="errorLog[0]">
 						Has dicho que se trataba de una función lineal y se trata de una cuadrática.
 					</li>
-					<li class="error2 errorLogLine">
+					<li class="errorLogLine" v-if="errorLog[1]">
 						Has dicho que se trataba de una función cuadrática y se trata de una lineal.
 					</li>
-					<li class="error3 errorLogLine">
+					<li class="errorLogLine" v-if="errorLog[2]">
 						No has hallado correctamente los puntos de corte con el eje OX o raices de la función: <span id="xCutFb"></span>
 					</li>
-					<li class="error4 errorLogLine">
+					<li class="errorLogLine" v-if="errorLog[3]">
 						No has hallado correctamente el punto de corte cone el eje OY. El punto corte con el eje OY es <span id="yCutFb"></span>
 					</li>
-					<li class="error5 errorLogLine" style="display:none">
+					<li class="errorLogLine" v-if="errorLog[4]">
+						No has hallado correctamente la pendiente de la función. La pendiente de la función es: <span id="vertexFb"></span>
+					</li>
+					<li class="errorLogLine" v-if="errorLog[5]">
 						No has hallado correctamente el vértice de la parábola. El vértice de la parábola está en el punto <span id="vertexFb"></span>
 					</li>
 				</ul>
 				</span>
-				<div class="alert alert-info error1" role="alert" style="display:none">
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[0]">
 					<strong>Recuerda: </strong>las funciones lineales tienen la forma f(x) = ax + b y su gráfica es una recta
 				</div>
-				<div class="alert alert-info error2" role="alert" style="display:none">
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[1]">
 					<strong>Recuerda: </strong>las funciones cuadráticas tienen la forma f(x) = ax<sup>2</sup> + bx + c y su gráfica es una parábola
 				</div>
-				<div class="alert alert-info error3" role="alert" style="display:none">
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[2]">
 					<strong>Recuerda: </strong>Los puntos de corte con el eje OX -o raices- de una función son los puntos tales que f(x) = 0. <span id="quadraticTip">En las funciones cuadráticas las raices vienen dadas por la expresión: <img src="media/img/cuadratica_raices.png" style="max-width:170px"></span>
 				</div>
-				<div class="alert alert-info error4" role="alert" style="display:none">
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[3]">
 					<strong>Recuerda: </strong>Las funciones lineales y cuadráticas siempre tienen un único punto de corte con el eje OY, para calcularlo encontrarmos el valor de f(0)
 				</div>
-				<div class="alert alert-info error5" role="alert" style="display:none">
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[4]">
+					<strong>Recuerda: </strong>La pendiente es la inclinación de la recta con respecto al eje de abscisas, en una función lineal f(x) = mx + b, la pendiente es m, si m > 0 la función es creciente y ángulo que forma la recta con la parte positiva del eje OX es agudo, por el contrario Si m < 0 la función es decreciente y ángulo que forma la recta con la parte positiva del eje OX es obtuso.
+				</div>
+				<div class="alert alert-info" role="alert" style="" v-if="errorLog[5]">
 					<strong>Recuerda: </strong>El vértice de una ecuación cuadrática se calcula como Vx = -b/2a y Vy = f(Vx)
 				</div>
 			</div>
