@@ -1,4 +1,4 @@
-let fns = ['-x-1','2x^2-4x','x','-3x+2','2x', 'x-2', 'x+2', '-2x^2', '3x^2+2'];
+let fns = ['x','-x-3','-2x^2', 'x'];
 let idDrawArea = "#plot";
 
 var app = new Vue({
@@ -107,7 +107,7 @@ var app = new Vue({
 		},
 		nextQ : function(){
 			this.givenAnsw = false;
-			this.cEqi = trickRandi(0,fns.length-1, this.cEqi);
+			this.cEqi += 1;
 		}
 	}
 })
